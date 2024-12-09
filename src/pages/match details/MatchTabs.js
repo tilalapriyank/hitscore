@@ -27,7 +27,7 @@ class MatchTabs extends Component {
       };
       const response = await fetch(url, { headers });
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       this.setState({ matchData: data });
     }
   }
@@ -37,10 +37,10 @@ class MatchTabs extends Component {
   };
 
   renderContent = () => {
-    const { activeTab } = this.state;
+    const { activeTab, matchData } = this.state;
     switch (activeTab) {
       case "info":
-        return <MatchInfo />;
+        return <MatchInfo matchInfo={matchData}/>;
       case "scorecard":
         return <MatchScorecard />;
       case "commentary":

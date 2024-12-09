@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 class MatchInfo extends Component {
   render() {
+    // let {MatchInfo} = MatchInfo;
+    // console.log(MatchInfo);
     return (
       <div className="p-4 bg-white rounded shadow-sm border">
         <div className="text-center bg-primary text-white p-3 rounded-top">
