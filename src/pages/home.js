@@ -40,7 +40,7 @@ class Home extends Component {
         <section className="recent-match bg-light py-5">
           <div className="container">
             <h2 className="text-center mb-4">Recent Matches</h2>
-            <div className="row">
+            <div className="row"> 
               {recentMatchData.map((item, index) => {
                 const matchId = item.seriesAdWrapper.matches[0].matchInfo.matchId;
                 return (
