@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import Recent from "../components/matches/recent";
 import { wait } from "@testing-library/user-event/dist/utils";
 import MatchTabs from "./match details/MatchTabs";
@@ -42,15 +41,11 @@ class Home extends Component {
             <h2 className="text-center mb-4">Recent Matches</h2>
             <div className="row"> 
               {recentMatchData.map((item, index) => {
-                const matchId = item.seriesAdWrapper.matches[0].matchInfo.matchId;
+                // const matchId = item.seriesAdWrapper.matches[0].;
                 return (
                   <div className="col-md-6 col-lg-4" key={index}>
                     <Recent matchData={item.seriesAdWrapper} />
-                    <Link
-                      to={`/match-details/${matchId}`}
-                      className="btn btn-primary mt-3">
-                      View Match Details
-                    </Link>
+                    
                   </div>
                 );
               })}
