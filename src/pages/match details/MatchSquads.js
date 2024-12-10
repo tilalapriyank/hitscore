@@ -1,75 +1,137 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import Image from "../../assets/image/image";
 
 class MatchSquads extends Component {
-  render() {
+  // Render individual player or staff info
+  renderPlayerInfo(player) {
     return (
-      <div className="p-4 bg-white rounded shadow-sm border">
-  <div className="text-center bg-primary text-white p-3 rounded-top">
-    <h4 className="mb-0">India vs Pakistan</h4>
-    <p className="mb-0">Team Squads</p>
-  </div>
-  <div className="p-3">
-    <h5 className="text-primary">India Squad</h5>
-    <table className="table table-bordered">
-      <thead className="bg-light">
-        <tr>
-          <th>Role</th>
-          <th>Players</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Batsmen</td>
-          <td>Rohit Sharma, Virat Kohli, Shubman Gill</td>
-        </tr>
-        <tr>
-          <td>Bowlers</td>
-          <td>Jasprit Bumrah, Mohammed Siraj, Kuldeep Yadav</td>
-        </tr>
-        <tr>
-          <td>All-rounders</td>
-          <td>Hardik Pandya, Ravindra Jadeja</td>
-        </tr>
-        <tr>
-          <td>Wicketkeepers</td>
-          <td>KL Rahul, Ishan Kishan</td>
-        </tr>
-      </tbody>
-    </table>
+      <div className="card col-6 mb-3 text-center">
+        <div className="card-body d-flex">
+          <Image imageId={player.faceImageId} width={"25%"} />
+          <div>
+            <h6 className="card-title">{player.fullName}</h6>
+            <p className="card-text">
+              <strong>Role:</strong> {player.role}
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
-    <h5 className="text-primary mt-4">Pakistan Squad</h5>
-    <table className="table table-bordered">
-      <thead className="bg-light">
-        <tr>
-          <th>Role</th>
-          <th>Players</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Batsmen</td>
-          <td>Babar Azam, Fakhar Zaman, Imam-ul-Haq</td>
-        </tr>
-        <tr>
-          <td>Bowlers</td>
-          <td>Shaheen Afridi, Haris Rauf, Naseem Shah</td>
-        </tr>
-        <tr>
-          <td>All-rounders</td>
-          <td>Shadab Khan, Mohammad Nawaz</td>
-        </tr>
-        <tr>
-          <td>Wicketkeepers</td>
-          <td>Mohammad Rizwan</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div className="text-center p-2 bg-light border-top rounded-bottom">
-    <p className="text-muted mb-0">Complete squads for the match.</p>
-  </div>
-</div>
+  // Render the list of players or staff in different sections (Playing 11, Bench, Support Staff)
+  renderTeamPlayers(players, sectionType) {
+    const sectionPlayers = players.filter((player) => {
+      if (sectionType === "playing11") {
+        return player.substitute === false && !player.isSupportStaff;
+      } else if (sectionType === "bench") {
+        return player.substitute === true && !player.isSupportStaff;
+      } else if (sectionType === "supportStaff") {
+        return player.isSupportStaff === true;
+      }
+      return false;
+    });
 
+    return (
+      <div className="d-flex flex-wrap justify-content-between">
+        {sectionPlayers.length > 0 ? (
+          sectionPlayers.map((player) => this.renderPlayerInfo(player))
+        ) : (
+          <p className="text-center">No players in this section.</p>
+        )}
+      </div>
+    );
+  }
+
+  // Main render method
+  render() {
+    const { MatchSquads } = this.props;
+    if (!MatchSquads) {
+      return <div>Loading...</div>;
+    }
+
+    const { matchInfo } = MatchSquads;
+    const { team1, team2 } = matchInfo;
+
+    return (
+      <div className="container">
+        {/* Playing 11 for both teams */}
+        <div className="row">
+          <div className="col-12">
+            <h4 className="text-center">Playing 11</h4>
+            <div className="d-flex justify-content-between">
+              {/* Team 1 Playing 11 */}
+              <div className="col-md-5">
+                <h5 className="text-center">{team1.name}</h5>
+                {team1.playerDetails ? (
+                  this.renderTeamPlayers(team1.playerDetails, "playing11")
+                ) : (
+                  <p className="text-center">Loading team 1 players...</p>
+                )}
+              </div>
+              {/* Team 2 Playing 11 */}
+              <div className="col-md-5">
+                <h5 className="text-center">{team2.name}</h5>
+                {team2.playerDetails ? (
+                  this.renderTeamPlayers(team2.playerDetails, "playing11")
+                ) : (
+                  <p className="text-center">Loading team 2 players...</p>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bench for both teams */}
+        <div className="row mt-4">
+          <div className="col-12">
+            <h4 className="text-center">Bench</h4>
+            <div className="d-flex justify-content-between">
+              {/* Team 1 Bench */}
+              <div className="col-md-5">
+                {team1.playerDetails ? (
+                  this.renderTeamPlayers(team1.playerDetails, "bench")
+                ) : (
+                  <p className="text-center">Loading team 1 bench...</p>
+                )}
+              </div>
+              {/* Team 2 Bench */}
+              <div className="col-md-5">
+                {team2.playerDetails ? (
+                  this.renderTeamPlayers(team2.playerDetails, "bench")
+                ) : (
+                  <p className="text-center">Loading team 2 bench...</p>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Support Staff for both teams */}
+        <div className="row mt-4">
+          <div className="col-12">
+            <h4 className="text-center">Support Staff</h4>
+            <div className="d-flex justify-content-between">
+              {/* Team 1 Support Staff */}
+              <div className="col-md-5">
+                {team1.playerDetails ? (
+                  this.renderTeamPlayers(team1.playerDetails, "supportStaff")
+                ) : (
+                  <p className="text-center">Loading team 1 support staff...</p>
+                )}
+              </div>
+              {/* Team 2 Support Staff */}
+              <div className="col-md-5">
+                {team2.playerDetails ? (
+                  this.renderTeamPlayers(team2.playerDetails, "supportStaff")
+                ) : (
+                  <p className="text-center">Loading team 2 support staff...</p>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     );
   }
 }

@@ -22,7 +22,7 @@ export default class Recent extends Component {
           </div>
           <p className="match-number">{matchInfo.matchDesc}</p>
           <div className="team-1 d-flex">
-            <Image imageId={matchInfo.team1.imageId} />
+            <Image imageId={matchInfo.team1.imageId} width={"10%"} />
             <p className="team-1-name mx-2">{matchInfo.team1.teamName}</p>
             <div className="match-score d-flex">
               <p>{team1Innings1}</p>
@@ -30,7 +30,7 @@ export default class Recent extends Component {
             </div>
           </div>
           <div className="team-2 d-flex my-1">
-            <Image imageId={matchInfo.team2.imageId} />
+            <Image imageId={matchInfo.team2.imageId} width={"10%"}/>
             <p className="team-2-name mx-2">{matchInfo.team2.teamName}</p>
             <div className="match-score d-flex">
               <p>{team2Innings1}</p>
