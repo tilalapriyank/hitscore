@@ -5,7 +5,7 @@ class MatchSquads extends Component {
   // Render individual player or staff info
   renderPlayerInfo(player) {
     return (
-      <div className="card col-6 mb-3 text-center">
+      <div className="card col-6 gx-5 mb-3 text-center">
         <div className="card-body d-flex">
           <Image imageId={player.faceImageId} width={"25%"} />
           <div>

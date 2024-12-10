@@ -7,7 +7,7 @@ class MatchInfo extends Component {
     if (!matchInfo) {
       return <div>Loading...</div>; // Show loading if matchInfo is not yet available
     }
-    
+
     return (
       <div className="p-4 bg-white rounded shadow-sm border">
         <div className="text-center bg-primary text-white p-3 rounded-top">
@@ -177,7 +177,10 @@ class MatchInfo extends Component {
                 <td>
                   {matchInfo.matchInfo ? (
                     <>
-                      <p>{matchInfo.matchInfo.umpire1.name},{matchInfo.matchInfo.umpire2.name}</p>
+                      <p>
+                        {matchInfo.matchInfo.umpire1.name},
+                        {matchInfo.matchInfo.umpire2.name}
+                      </p>
                     </>
                   ) : (
                     "No umpires listed"
@@ -248,24 +251,29 @@ class MatchInfo extends Component {
               </tr>
             </tbody>
           </table>
-
-          <h5 className="text-primary">Broadcast Details</h5>
-          <table className="table table-bordered">
-            <tbody>
-              <tr>
-                <th scope="row" className="bg-light">
-                  TV Channels
-                </th>
-                <td>{matchInfo.broadcastInfo[0].broadcaster[1].value}</td>
-              </tr>
-              <tr>
-                <th scope="row" className="bg-light">
-                  Live Streaming
-                </th>
-                <td>{matchInfo.broadcastInfo[0].broadcaster[0].value}</td>
-              </tr>
-            </tbody>
-          </table>
+          {matchInfo.broadcastInfo ? (
+            <>
+              <h5 className="text-primary">Broadcast Details</h5>
+              <table className="table table-bordered">
+                <tbody>
+                  <tr>
+                    <th scope="row" className="bg-light">
+                      TV Channels
+                    </th>
+                    {/* <td>{matchInfo.broadcastInfo[0].broadcaster[1].value}</td> */}
+                  </tr>
+                  <tr>
+                    <th scope="row" className="bg-light">
+                      Live Streaming
+                    </th>
+                    {/* <td>{matchInfo.broadcastInfo[0].broadcaster[0].value}</td> */}
+                  </tr>
+                </tbody>
+              </table>
+            </>
+          ) : (
+            " "
+          )}
         </div>
         <div className="text-center p-2 bg-light border-top rounded-bottom">
           <p className="text-muted mb-0">Stay tuned for live updates.</p>
