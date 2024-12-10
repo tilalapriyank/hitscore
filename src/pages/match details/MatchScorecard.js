@@ -1,117 +1,124 @@
 import React, { Component } from 'react';
 
 class MatchScorecard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      matchDetails: {
+        matchType: 'T20',
+        date: '10 Dec 2024',
+        venue: 'Stadium XYZ',
+        teams: 'Team A vs Team B',
+      },
+      batting: [
+        { player: 'Player 1', runs: 50, balls: 30, fours: 4, sixes: 3, strikeRate: 166.7 },
+        { player: 'Player 2', runs: 20, balls: 15, fours: 2, sixes: 1, strikeRate: 133.3 },
+        { player: 'Player 3', runs: 80, balls: 60, fours: 6, sixes: 4, strikeRate: 133.3 },
+        // More players...
+      ],
+      bowling: [
+        { bowler: 'Bowler 1', overs: 4, runs: 30, wickets: 2, economy: 7.5 },
+        { bowler: 'Bowler 2', overs: 4, runs: 25, wickets: 1, economy: 6.25 },
+        { bowler: 'Bowler 3', overs: 3, runs: 35, wickets: 0, economy: 11.67 },
+        // More bowlers...
+      ],
+      extras: {
+        wides: 5,
+        noBalls: 2,
+        byes: 1,
+      },
+      totalRuns: 200,
+      totalWickets: 5,
+      totalOvers: 20,
+    };
+  }
+
   render() {
+    const { matchDetails, batting, bowling, extras, totalRuns, totalWickets, totalOvers } = this.state;
+
     return (
-      <div className="p-4 bg-white rounded shadow-sm border">
-  <div className="text-center bg-primary text-white p-3 rounded-top">
-    <h4 className="mb-0">India vs Pakistan</h4>
-    <p className="mb-0">Scorecard</p>
-  </div>
-  <div className="p-3">
-    <h5 className="text-primary">India Innings</h5>
-    <table className="table table-bordered">
-      <thead className="bg-light">
-        <tr>
-          <th>Batsman</th>
-          <th>Runs</th>
-          <th>Balls</th>
-          <th>Fours</th>
-          <th>Sixes</th>
-          <th>Strike Rate</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Rohit Sharma</td>
-          <td>72</td>
-          <td>50</td>
-          <td>8</td>
-          <td>3</td>
-          <td>144.00</td>
-        </tr>
-        <tr>
-          <td>Virat Kohli</td>
-          <td>85*</td>
-          <td>70</td>
-          <td>7</td>
-          <td>1</td>
-          <td>121.43</td>
-        </tr>
-        <tr>
-          <td>Shubman Gill</td>
-          <td>45</td>
-          <td>36</td>
-          <td>6</td>
-          <td>1</td>
-          <td>125.00</td>
-        </tr>
-      </tbody>
-    </table>
+      <div className="scorecard">
+        {/* Match Details */}
+        <section className="match-details">
+          <h2>Match: {matchDetails.teams}</h2>
+          <p>{matchDetails.date}</p>
+          <p>{matchDetails.matchType} - {matchDetails.venue}</p>
+        </section>
 
-    <h5 className="text-primary mt-4">Bowling - Pakistan</h5>
-    <table className="table table-bordered">
-      <thead className="bg-light">
-        <tr>
-          <th>Bowler</th>
-          <th>Overs</th>
-          <th>Maidens</th>
-          <th>Runs</th>
-          <th>Wickets</th>
-          <th>Economy</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Shaheen Afridi</td>
-          <td>10</td>
-          <td>0</td>
-          <td>50</td>
-          <td>2</td>
-          <td>5.00</td>
-        </tr>
-        <tr>
-          <td>Haris Rauf</td>
-          <td>9</td>
-          <td>1</td>
-          <td>42</td>
-          <td>1</td>
-          <td>4.67</td>
-        </tr>
-        <tr>
-          <td>Shadab Khan</td>
-          <td>10</td>
-          <td>0</td>
-          <td>62</td>
-          <td>1</td>
-          <td>6.20</td>
-        </tr>
-      </tbody>
-    </table>
+        {/* Batting Stats */}
+        <section className="batting">
+          <h3>Batting</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Player</th>
+                <th>Runs</th>
+                <th>Balls</th>
+                <th>4s</th>
+                <th>6s</th>
+                <th>SR</th>
+              </tr>
+            </thead>
+            <tbody>
+              {batting.map((batter, index) => (
+                <tr key={index}>
+                  <td>{batter.player}</td>
+                  <td>{batter.runs}</td>
+                  <td>{batter.balls}</td>
+                  <td>{batter.fours}</td>
+                  <td>{batter.sixes}</td>
+                  <td>{batter.strikeRate}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </section>
 
-    <h5 className="text-primary mt-4">Summary</h5>
-    <table className="table table-bordered">
-      <tbody>
-        <tr>
-          <th scope="row" className="bg-light">Total Runs</th>
-          <td>320/5</td>
-        </tr>
-        <tr>
-          <th scope="row" className="bg-light">Overs</th>
-          <td>50</td>
-        </tr>
-        <tr>
-          <th scope="row" className="bg-light">Run Rate</th>
-          <td>6.40</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div className="text-center p-2 bg-light border-top rounded-bottom">
-    <p className="text-muted mb-0">Stay tuned for live updates.</p>
-  </div>
-</div>
+        {/* Extras */}
+        <section className="extras">
+          <h3>Extras</h3>
+          <ul>
+            <li>Wides: {extras.wides}</li>
+            <li>No Balls: {extras.noBalls}</li>
+            <li>Byes: {extras.byes}</li>
+          </ul>
+        </section>
 
+        {/* Bowling Stats */}
+        <section className="bowling">
+          <h3>Bowling</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Bowler</th>
+                <th>Overs</th>
+                <th>Runs</th>
+                <th>Wickets</th>
+                <th>Economy</th>
+              </tr>
+            </thead>
+            <tbody>
+              {bowling.map((bowler, index) => (
+                <tr key={index}>
+                  <td>{bowler.bowler}</td>
+                  <td>{bowler.overs}</td>
+                  <td>{bowler.runs}</td>
+                  <td>{bowler.wickets}</td>
+                  <td>{bowler.economy}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </section>
+
+        {/* Match Summary */}
+        <section className="match-summary">
+          <h3>Match Summary</h3>
+          <p>Total Runs: {totalRuns}</p>
+          <p>Total Wickets: {totalWickets}</p>
+          <p>Total Overs: {totalOvers}</p>
+        </section>
+      </div>
     );
   }
 }

@@ -55,6 +55,19 @@ class MatchSquads extends Component {
 
     return (
       <div className="container">
+        <div className="row">
+          <div className="col-12">
+            <div className="d-flex justify-content-between">
+              <div className="col-md-5">
+                <h5 className="text-center">{team1.name}</h5>
+              </div>
+              <div className="col-md-5">
+                <h5 className="text-center">{team2.name}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Playing 11 for both teams */}
         <div className="row">
           <div className="col-12">
@@ -62,7 +75,6 @@ class MatchSquads extends Component {
             <div className="d-flex justify-content-between">
               {/* Team 1 Playing 11 */}
               <div className="col-md-5">
-                <h5 className="text-center">{team1.name}</h5>
                 {team1.playerDetails ? (
                   this.renderTeamPlayers(team1.playerDetails, "playing11")
                 ) : (
@@ -71,7 +83,6 @@ class MatchSquads extends Component {
               </div>
               {/* Team 2 Playing 11 */}
               <div className="col-md-5">
-                <h5 className="text-center">{team2.name}</h5>
                 {team2.playerDetails ? (
                   this.renderTeamPlayers(team2.playerDetails, "playing11")
                 ) : (
