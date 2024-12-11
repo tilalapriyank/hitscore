@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"; // Hook to access matchId
 
 import MatchInfo from "./MatchInfo";
 import MatchScorecard from "./MatchScorecard";
-import MatchCommentary from "./MatchCommentary";
+import MatchDetails from "./MatchCommentary";
 import MatchSquads from "./MatchSquads";
 
 class MatchTabs extends Component {
@@ -11,7 +11,7 @@ class MatchTabs extends Component {
     super(props);
     this.state = {
       matchData: null,
-      activeTab: "info",
+      activeTab: "commentary",
     };
   }
 
@@ -22,8 +22,8 @@ class MatchTabs extends Component {
       const headers = {
         // "X-RapidAPI-Key": "368af94cf6msh643b0a2deb7379dp1c9b02jsn34e51b16fb12", //my
         // "X-RapidAPI-Key": "5e49f223b1msh47d713ec8467bcfp186a96jsn1a7b4b20677f",
-        "X-RapidAPI-Key": "87be1248f9msh187428a9aedb8ecp1673a9jsn3b0b1387b645",
-        // "X-RapidAPI-Key": "dd76d23715msh3ae2c9a68068085p1e4b89jsnb016433712a0",
+        // "X-RapidAPI-Key": "87be1248f9msh187428a9aedb8ecp1673a9jsn3b0b1387b645",
+        "X-RapidAPI-Key": "dd76d23715msh3ae2c9a68068085p1e4b89jsnb016433712a0",
         "X-RapidAPI-Host": "cricbuzz-cricket.p.rapidapi.com",
       };
       const response = await fetch(infourl, { headers });
@@ -39,7 +39,7 @@ class MatchTabs extends Component {
 
   renderContent = () => {
     const { activeTab, matchData } = this.state;
-    const {matchId} = this.props;
+    const { matchId } = this.props;
 
     if (!matchData) {
       return <div>Loading...</div>; // Add a loading indicator until matchData is available
@@ -51,7 +51,7 @@ class MatchTabs extends Component {
       case "scorecard":
         return <MatchScorecard matchId={matchId} />;
       case "commentary":
-        return <MatchCommentary matchData={matchData} />;
+        return <MatchDetails matchData={matchData} />;
       case "squads":
         return <MatchSquads MatchSquads={matchData} />;
       default:
@@ -60,8 +60,7 @@ class MatchTabs extends Component {
   };
 
   render() {
-    const { activeTab } = this.state;
-
+    const { activeTab, matchData } = this.state;
     return (
       <div className="container my-5">
         {/* Match Header */}
@@ -103,15 +102,41 @@ class MatchTabs extends Component {
               : "Loading..."}
           </p>
         </div>
+        <div className="fw-bold">
+          {this.state.matchData &&
+          this.state.matchData.matchInfo &&
+          this.state.matchData.matchInfo.state === "complete" ? (
+            this.state.matchData.matchInfo.result.resultType === "win" ? (
+              <p>
+                {this.state.matchData.matchInfo.result.winByInnings &&
+                this.state.matchData.matchInfo.result.winByRuns
+                  ? `${this.state.matchData.matchInfo.result.winningTeam} won by an innings and ${this.state.matchData.matchInfo.result.winningMargin} runs`
+                  : this.state.matchData.matchInfo.result.winByInnings
+                  ? `${this.state.matchData.matchInfo.result.winningTeam} won by an innings`
+                  : this.state.matchData.matchInfo.result.winByRuns
+                  ? `${this.state.matchData.matchInfo.result.winningTeam} won by ${this.state.matchData.matchInfo.result.winningMargin} runs`
+                  : `${this.state.matchData.matchInfo.result.winningTeam} won by ${this.state.matchData.matchInfo.result.winningMargin} wickets`}
+              </p>
+            ) : null
+          ) : (
+            <p>
+              {this.state.matchData && this.state.matchData.matchInfo
+                ? this.state.matchData.matchInfo.status
+                : "Loading..."}
+            </p>
+          )}
+        </div>
 
         {/* Tabs Navigation */}
         <ul className="nav nav-pills justify-content-center mt-4">
           <li className="nav-item">
             <button
-              className={`nav-link ${activeTab === "info" ? "active" : ""}`}
-              onClick={() => this.setActiveTab("info")}
+              className={`nav-link ${
+                activeTab === "commentary" ? "active" : ""
+              }`}
+              onClick={() => this.setActiveTab("commentary")}
             >
-              Info
+              Commentary
             </button>
           </li>
           <li className="nav-item">
@@ -126,24 +151,21 @@ class MatchTabs extends Component {
           </li>
           <li className="nav-item">
             <button
-              className={`nav-link ${
-                activeTab === "commentary" ? "active" : ""
-              }`}
-              onClick={() => this.setActiveTab("commentary")}
-            >
-              Commentary
-            </button>
-          </li>
-          <li className="nav-item">
-            <button
               className={`nav-link ${activeTab === "squads" ? "active" : ""}`}
               onClick={() => this.setActiveTab("squads")}
             >
               Squads
             </button>
           </li>
+          <li className="nav-item">
+            <button
+              className={`nav-link ${activeTab === "info" ? "active" : ""}`}
+              onClick={() => this.setActiveTab("info")}
+            >
+              Info
+            </button>
+          </li>
         </ul>
-
         {/* Tab Content */}
         <div className="tab-content mt-4">{this.renderContent()}</div>
       </div>
