@@ -27,6 +27,7 @@ export default class image extends Component {
         this.setState({ src: url, width: width });
       } else {
         // console.error("Failed to load image");
+        this.setState({width: width });
       }
     } catch (error) {
       // console.error("Error fetching image:", error);

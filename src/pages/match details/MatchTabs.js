@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom"; // Hook to access matchId
 
 import MatchInfo from "./MatchInfo";
 import MatchScorecard from "./MatchScorecard";
-import MatchDetails from "./MatchCommentary";
 import MatchSquads from "./MatchSquads";
 
 class MatchTabs extends Component {
@@ -11,7 +10,7 @@ class MatchTabs extends Component {
     super(props);
     this.state = {
       matchData: null,
-      activeTab: "commentary",
+      activeTab: "info",
     };
   }
 
@@ -50,8 +49,6 @@ class MatchTabs extends Component {
         return <MatchInfo matchInfo={matchData} />;
       case "scorecard":
         return <MatchScorecard matchId={matchId} />;
-      case "commentary":
-        return <MatchDetails matchData={matchData} />;
       case "squads":
         return <MatchSquads MatchSquads={matchData} />;
       default:
@@ -131,12 +128,10 @@ class MatchTabs extends Component {
         <ul className="nav nav-pills justify-content-center mt-4">
           <li className="nav-item">
             <button
-              className={`nav-link ${
-                activeTab === "commentary" ? "active" : ""
-              }`}
-              onClick={() => this.setActiveTab("commentary")}
+              className={`nav-link ${activeTab === "info" ? "active" : ""}`}
+              onClick={() => this.setActiveTab("info")}
             >
-              Commentary
+              Info
             </button>
           </li>
           <li className="nav-item">
@@ -155,14 +150,6 @@ class MatchTabs extends Component {
               onClick={() => this.setActiveTab("squads")}
             >
               Squads
-            </button>
-          </li>
-          <li className="nav-item">
-            <button
-              className={`nav-link ${activeTab === "info" ? "active" : ""}`}
-              onClick={() => this.setActiveTab("info")}
-            >
-              Info
             </button>
           </li>
         </ul>
