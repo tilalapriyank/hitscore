@@ -15,7 +15,7 @@ export default class Results extends Component {
     if (teamId) {
       const apiUrl = `https://cricbuzz-cricket.p.rapidapi.com/teams/v1/${teamId}/results`;
       const apiHeaders = {
-        "X-RapidAPI-Key": "5e49f223b1msh47d713ec8467bcfp186a96jsn1a7b4b20677f", // Replace with your RapidAPI key
+        "X-RapidAPI-Key": "8b50554ad0msh2d9d7222c0fdf3cp18bee1jsn73b25325bca0", // Replace with your RapidAPI key
         "X-RapidAPI-Host": "cricbuzz-cricket.p.rapidapi.com",
       };
       try {

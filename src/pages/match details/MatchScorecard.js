@@ -13,7 +13,7 @@ class MatchScorecard extends Component {
     if (matchId) {
       const url = `https://cricbuzz-cricket.p.rapidapi.com/mcenter/v1/${matchId}/hscard`;
       const headers = {
-        "X-RapidAPI-Key": "368af94cf6msh643b0a2deb7379dp1c9b02jsn34e51b16fb12",
+        "X-RapidAPI-Key": "8b50554ad0msh2d9d7222c0fdf3cp18bee1jsn73b25325bca0",
         "X-RapidAPI-Host": "cricbuzz-cricket.p.rapidapi.com",
       };
       const response = await fetch(url, { headers });

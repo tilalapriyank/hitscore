@@ -12,7 +12,7 @@ export default class Schedule extends Component {
     if (teamId) {
       const url = `https://cricbuzz-cricket.p.rapidapi.com/teams/v1/${teamId}/schedule`;
       const headers = {
-        "X-RapidAPI-Key": "5e49f223b1msh47d713ec8467bcfp186a96jsn1a7b4b20677f",
+        "X-RapidAPI-Key": "8b50554ad0msh2d9d7222c0fdf3cp18bee1jsn73b25325bca0",
         "X-RapidAPI-Host": "cricbuzz-cricket.p.rapidapi.com",
       };
       const response = await fetch(url, { headers });
@@ -39,7 +39,7 @@ export default class Schedule extends Component {
       };
       const formattedDate = new Date(date).toLocaleString("en-IN", options);
 
-      const [month, day, time, period] = formattedDate.split(", ");
+      const [month, day ] = formattedDate.split(", ");
       return `${month} ${day}`;
     };
     const isSameDate = (start, end) => {
