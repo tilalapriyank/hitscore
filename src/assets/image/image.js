@@ -35,6 +35,6 @@ export default class image extends Component {
   }
   render() {
     const { src, width } = this.state;
-    return <img src={src} width={width} />;
+    return <img src={src} width={width} alt="img"/>;
   }
 }

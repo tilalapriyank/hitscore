@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+=======
+import "./App.css";
+>>>>>>> f5ce52db78e614e91d33c88853ccf8d536af4f82
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 

@@ -15,7 +15,7 @@ export default class Teams extends Component {
     try {
       const infourl = `https://cricbuzz-cricket.p.rapidapi.com/teams/v1/${tab}`;
       const headers = {
-        "X-RapidAPI-Key": "dd76d23715msh3ae2c9a68068085p1e4b89jsnb016433712a0",
+        "X-RapidAPI-Key": "8b50554ad0msh2d9d7222c0fdf3cp18bee1jsn73b25325bca0",
         "X-RapidAPI-Host": "cricbuzz-cricket.p.rapidapi.com",
       };
       const response = await fetch(infourl, { headers });
