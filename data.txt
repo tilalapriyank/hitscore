@@ -1,0 +1,63 @@
+src/
+├── api/                    # API-related files (different for each feature)
+│   ├── apiConfig.js        # API key and host configurations (common configuration)
+│   ├── matchApi.js         # API for live, upcoming, recent matches
+│   ├── newsApi.js          # API for top news and categories
+│   ├── teamApi.js          # API for fetching team info (international, domestic, etc.)
+│   ├── matchDetailsApi.js  # API for fetching match details (info, scorecard, squad, etc.)
+│   ├── seriesApi.js        # API for series-related data
+│   ├── playerApi.js        # API for player details, career, statistics, etc.
+│   ├── venueApi.js         # API for venue-related details
+│   ├── statsApi.js         # API for fetching statistics and rankings
+│   └── photosApi.js        # API for fetching gallery photos
+├── components/             # Reusable UI components
+│   ├── header/             # Header component (Navbar, Logo, etc.)
+│   │   └── Header.js       # Header component
+│   ├── matches/            # Matches-related components
+│   │   ├── MatchCard.js    # Card displaying a single match (for live, upcoming, recent)
+│   │   └── MatchTabs.js    # Tabs for match details (overview, scorecard, squad)
+│   ├── news/               # News-related components
+│   │   ├── NewsCard.js     # News section component (individual news item)
+│   │   └── CategoryTabs.js # Tabs for news categories
+│   ├── teams/              # Teams-related components
+│   │   ├── TeamCard.js     # Card displaying individual team details
+│   │   └── TeamList.js     # List of teams (popular, search, etc.)
+│   ├── series/             # Series-related components
+│   │   ├── SeriesCard.js   # Card displaying individual series
+│   │   └── SeriesTabs.js   # Tabs for series details (achievements, matches, etc.)
+│   ├── players/            # Player-related components
+│   │   ├── PlayerCard.js   # Card displaying individual player details
+│   │   └── PlayerTabs.js   # Tabs for player career, batting, bowling, etc.
+│   ├── venues/             # Venue-related components
+│   │   ├── VenueCard.js    # Card displaying venue details
+│   │   └── VenueTabs.js    # Tabs for venue info, matches, stats
+│   ├── photos/             # Photo gallery-related components
+│   │   ├── GalleryCard.js  # Card displaying a gallery photo
+│   │   └── GalleryTabs.js  # Tabs for different photo categories (match, player, etc.)
+├── hooks/                  # Custom hooks for managing state, data fetching, etc.
+│   └── useFetch.js         # Custom hook for handling API requests
+├── pages/                  # Pages for routing
+│   ├── home/               # Home page
+│   │   └── Home.js         # Home page displaying live, upcoming, recent matches
+│   ├── matchDetails/       # Match details page
+│   │   └── MatchDetails.js # Displays match information, scorecard, squad, etc.
+│   ├── teams/              # Teams page
+│   │   └── Teams.js        # Lists all teams (international, domestic, etc.)
+│   ├── teamDetails/        # Team details page
+│   │   └── TeamDetails.js  # Detailed team view (schedule, results, players, etc.)
+│   ├── series/             # Series page
+│   │   └── Series.js       # Lists all series
+│   ├── seriesDetails/      # Series details page
+│   │   └── SeriesDetails.js# Detailed series view (achievements, matches, news, etc.)
+│   ├── news/               # News page
+│   │   └── News.js         # Lists news categories and individual news
+│   ├── playerDetails/      # Player details page
+│   │   └── PlayerDetails.js# Displays detailed player info (career, stats, etc.)
+│   ├── venueDetails/       # Venue details page
+│   │   └── VenueDetails.js # Displays venue info, matches, stats
+│   ├── photos/             # Photo gallery page
+│   │   └── Photos.js       # Displays photo galleries for matches or players
+├── App.js                  # Main entry point for React Router and layout
+├── index.js                # React entry point
+└── styles/                 # CSS/SCSS files
+    └── App.css             # Global styles
